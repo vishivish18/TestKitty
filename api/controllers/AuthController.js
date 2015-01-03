@@ -16,6 +16,7 @@ module.exports = {
       if ((err) || (!user)) {
         return res.send({
         message: 'login failed'
+        
         });
         res.send(err);
       }

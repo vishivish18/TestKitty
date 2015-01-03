@@ -10,29 +10,27 @@ schema: true,
   attributes: {
       
     username: {
-     type: 'string',
-        required: true,
+     type: 'email',
+        required: true, 
         unique: true
-        
-         
-     },
-      /*
-      email: {
+    },
+      
+      name: {
       type: 'string',
           required: true,
-          unique: true
           
-      },*/
+          
+      },
       password: {
       type: 'string',
           required: true
      
-      },/*
+      },
       re_password: {
       type: 'string',
           required: true
      
-      },*/
+      },
       toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

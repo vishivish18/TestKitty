@@ -1,6 +1,7 @@
 <script>
   $(function() {
     $( "#tabs" ).tabs();
+      
   });
   </script>
 
@@ -15,19 +16,13 @@
  </ul>                 
 <div style="height:60px;"></div>
 <div id="tabs-1">
-<form action="/auth/local" method="post">
-    <div>
-        <label>Email:</label>
-        <input type="text" name="email"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-     <p><a style="text-decoration:underline; cursor:pointer;">Forgot Password ?</a></p>
+<form action="/process" method="post">
+<label>Email:</label>
+<div><input name="username" type="text" /></div>
+<label>Password:</label>
+<div><input name="password" type="password" /></div>
+<div><input type="submit" /></div>
+<p><a style="text-decoration:underline; cursor:pointer;">Forgot Password ?</a></p>
 </form>
     
 </div>
@@ -36,17 +31,20 @@
     
 <div id="tabs-2">
 <form action="/user/create" method="POST">
-	<p><input id="username" name="username" type="text" placeholder="username" /></p>
-	<p><input id="email" name="email" type="email" placeholder="E-mail" /></p>
-    <p><input id="password" name="password" type="password" placeholder="Password" /></p>
-    <p><input id="re_password" name="re_password" type="password" placeholder="Re-Password" /></p>
-    <p><input id="signupsubmit" type="submit" value="Sign Up" name="action"</p>
+
+<div><input name="username" type="email" placeholder="E-Mail" /></div>
+<div><input name="name" type="text" placeholder="Name" /></div>
+<div><input name="password" type="password" placeholder="Password"  /></div>
+<div><input name="re_password" type="password" placeholder="Re-Passwprd"  /></div>
+<div><input type="submit" /></div>
+
+
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
 </div>
     
     
-   
+
     
     
     
