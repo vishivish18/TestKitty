@@ -1,0 +1,52 @@
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>
+
+<p align="center"><strong>Welcome to Kitty | Mutiplayer Card Game Trial</strong></p>
+
+    
+    
+<div id="tabs" align="center">
+  <ul style="position:absolute; left:555px;">
+    <li><a href="#tabs-1">Login</a></li>
+    <li><a href="#tabs-2" >Signup</a></li>
+ </ul>                 
+<div style="height:60px;"></div>
+<div id="tabs-1">
+<form action="/auth/local" method="post">
+    <div>
+        <label>Email:</label>
+        <input type="text" name="email"/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Log In"/>
+    </div>
+     <p><a style="text-decoration:underline; cursor:pointer;">Forgot Password ?</a></p>
+</form>
+    
+</div>
+    
+    
+    
+<div id="tabs-2">
+<form action="/user/create" method="POST">
+	<p><input id="name" name="name" type="text" placeholder="Name" /></p>
+	<p><input id="email" name="email" type="email" placeholder="E-mail" /></p>
+    <p><input id="password" name="password" type="password" placeholder="Password" /></p>
+    <p><input id="re_password" name="re_password" type="password" placeholder="Re-Password" /></p>
+    <p><input id="signupsubmit" type="submit" value="Sign Up" name="action"</p>
+    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+</form>
+</div>
+    
+    
+   
+    
+    
+    
