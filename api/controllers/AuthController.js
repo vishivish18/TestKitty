@@ -14,17 +14,20 @@ module.exports = {
     
       passport.authenticate('local', function(err, user, info) {
       if ((err) || (!user)) {
-        return res.send({
-        message: 'login failed'
+        //return res.send({
+        //message: 'login failed'
         
-        });
+        //});
+          return res.redirect('/user/new');
         res.send(err);
       }
       req.logIn(user, function(err) {
         if (err) res.send(err);
-        return res.send({
-          message: 'login successful'
-        });
+        //return res.send({
+        //  message: 'login successful'
+            
+    //    });
+          return res.redirect('/user/show/'+user.id);
       });
     })(req, res);
   
