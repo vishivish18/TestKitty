@@ -1,19 +1,19 @@
 <script>
   $(function() {
     $( "#tabs" ).tabs();
-      
+
   });
   </script>
 
 <p align="center"><strong>Welcome to Kitty | Mutiplayer Card Game Trial</strong></p>
 
-    
-    
+
+
 <div id="tabs" align="center">
   <ul style="position:absolute; left:555px;">
     <li><a href="#tabs-1">Login</a></li>
     <li><a href="#tabs-2" >Signup</a></li>
- </ul>                 
+ </ul>
 <div style="height:90px;"></div>
 <div id="tabs-1">
 <form action="/process" method="post">
@@ -22,14 +22,15 @@
 <label>Password:</label>
 <div><input name="password" type="password" /></div>
 </br>
+<a href="/auth/facebook">Login With Facebook</a>
 <div><input type="submit" /></div>
 <p><a style="text-decoration:underline; cursor:pointer;">Forgot Password ?</a></p>
 </form>
-    
+
 </div>
-    
-    
-    
+
+
+
 <div id="tabs-2">
 <form action="/user/create" method="POST">
 
@@ -47,9 +48,3 @@
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
 </div>
-    
-    
-
-    
-    
-    

@@ -1,7 +1,9 @@
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
-  bcrypt = require('bcryptjs'); 
+  FacebookStrategy = require('passport-facebook').Strategy,
+  bcrypt = require('bcryptjs');
 //helper functions
+
 function findById(id, fn) {
   User.findOne(id).exec(function (err, user) {
     if (err) {
@@ -11,7 +13,24 @@ function findById(id, fn) {
     }
   });
 }
- 
+
+function findByFacebookId(id, fn) {
+  User.findOne({
+    facebookId: id
+  }).exec(function (err, user) {
+    if (err) {
+      return fn(null, null);
+    } else {
+      return fn(null, user);
+    }
+  });
+}
+
+
+
+
+
+
 function findByUsername(u, fn) {
   User.findOne({
     username: u
@@ -25,7 +44,7 @@ function findByUsername(u, fn) {
     }
   });
 }
- 
+
 // Passport session setup.
 // To support persistent login sessions, Passport needs to be able to
 // serialize users into and deserialize users out of the session. Typically,
@@ -34,13 +53,13 @@ function findByUsername(u, fn) {
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
- 
+
 passport.deserializeUser(function (id, done) {
   findById(id, function (err, user) {
     done(err, user);
   });
 });
- 
+
 // Use the LocalStrategy within Passport.
 // Strategies in passport require a `verify` function, which accept
 // credentials (in this case, a username and password), and invoke a callback
@@ -78,4 +97,46 @@ passport.use(new LocalStrategy(
       })
     });
   }
+));
+
+
+
+passport.use(new FacebookStrategy({
+  clientID: "304950629698649",
+  clientSecret: "b7eb9d7f18046386a06ebd12b091406b",
+  callbackURL: "http://localhost:1337/user/facebook/callback",
+  enableProof: false
+}, function (accessToken, refreshToken, profile, done) {
+
+  findByFacebookId(profile.id, function (err, user) {
+
+    // Create a new User if it doesn't exist yet
+    if (!user) {
+      User.create({
+
+        facebookId: profile.id
+
+        // You can also add any other data you are getting back from Facebook here
+        // as long as it is in your model
+
+      }).exec(function (err, user) {
+        if (user) {
+          return done(null, user, {
+            message: 'Logged In Successfully'
+          });
+        } else {
+          return done(err, null, {
+            message: 'There was an error logging you in with Facebook'
+          });
+        }
+      });
+
+      // If there is already a user, return it
+    } else {
+      return done(null, user, {
+        message: 'Logged In Successfully'
+      });
+    }
+  });
+}
 ));
