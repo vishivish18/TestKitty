@@ -1,0 +1,267 @@
+<table>
+	<tr>
+    	<td align="left" width="300px;">Player 1</td>
+        <td align="left" width="100px;">Set 1</td>
+        <td align="left" width="100px;">Set 2</td>
+        <td align="left" width="100px;">Set 3</td>
+    </tr>
+    
+    <tr>
+    	<td width="300px;"><input type="text" value="" name="p1cards" readonly="readonly" size="35" /></td>
+        <td width="100px;"><input id="p1set1cards" type="text" value="" name="p1s1cards" size="10" /></td>
+        <td width="100px;"><input id="p1set2cards" type="text" value="" name="p1s2cards" size="10" /></td>
+        <td width="100px;"><input id="p1set3cards" type="text" value="" name="p1s3cards" size="10" /></td>
+        
+        <td width="100px;"><input id="p1button" type="button" value="Done" name="p1done"/></td>
+        
+    </tr>
+    
+    <tr>
+    	<td align="left" width="300px;">Player 2</td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+    </tr>
+    
+     <tr>
+    	<td width="300px;"><input type="text" value="" name="p2cards" readonly="readonly" size="35" /></td>
+         <td width="100px;"><input id="p2set1cards" type="text" value="" name="p2s1cards" size="10" /></td>
+         <td width="100px;"><input id="p2set2cards" type="text" value="" name="p2s2cards" size="10" /></td>
+         <td width="100px;"><input id="p2set3cards" type="text" value="" name="p2s3cards" size="10" /></td>
+         
+         <td width="100px;"><input id="p2button" type="button" value="Done" name="p2done"/></td>
+        
+    </tr>
+    
+    
+     <tr>
+    	<td align="left" width="300px;">Player 3</td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+    </tr>
+    
+     <tr>
+    	<td width="300px;"><input type="text" value="" name="p3cards" readonly="readonly" size="35" /></td>
+         <td width="100px;"><input id="p3set1cards" type="text" value="" name="p3s1cards" size="10" /></td>
+         <td width="100px;"><input id="p3set2cards" type="text" value="" name="p3s2cards" size="10" /></td>
+         <td width="100px;"><input id="p3set3cards" type="text" value="" name="p3s3cards" size="10" /></td>
+         
+         <td width="100px;"><input id="p3button" type="button" value="Done" name="p3done"/></td>
+        
+    </tr>
+    
+     <tr>
+    	<td align="left" width="300px;">Player 4</td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+    </tr>
+    
+     <tr>
+    	<td width="300px;"><input type="text" value="" name="p4cards" readonly="readonly" size="35" /></td>
+         <td width="100px;"><input id="p4set1cards" type="text" value="" name="p4s1cards" size="10" /></td>
+         <td width="100px;"><input id="p4set2cards" type="text" value="" name="p4s2cards" size="10" /></td>
+         <td width="100px;"><input id="p4set3cards" type="text" value="" name="p4s3cards" size="10" /></td>
+         
+         <td width="100px;"><input id="p4button" type="button" value="Done" name="p4done"/></td>
+        
+    </tr>
+    
+     <tr>
+    	<td align="left" width="300px;">Player 5</td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+        <td align="left" width="100px;"></td>
+    </tr>
+    
+     <tr>
+    	<td width="300px;"><input type="text" value="" name="p5cards" readonly="readonly" size="35" /></td>
+         <td width="100px;"><input id="p5set1cards" type="text" value="" name="p5s1cards" size="10" /></td>
+         <td width="100px;"><input id="p5set2cards" type="text" value="" name="p5s2cards" size="10" /></td>
+         <td width="100px;"><input id="p5set3cards" type="text" value="" name="p5s3cards" size="10" /></td>
+         
+         <td width="100px;"><input id="p5button" type="button" value="Done" name="p5done"/></td>
+        
+    </tr>
+    
+    
+    
+    
+    <tr>
+    	<td align="left">Results</td>
+        <td align="left"><input type="text" name="s1r" readonly="readonly" value="" size="10" /></td>
+        <td align="left"><input type="text" name="s1r" readonly="readonly" value="" size="10" /></td>
+        <td align="left"><input type="text" name="s1r" readonly="readonly" value="" size="10" /></td>
+    </tr>
+    
+</table>
+
+
+<div id="Deck">
+<p>All Cards</p>
+<input type="text" value="" name="deckcards" readonly="readonly" size="200" />
+
+<p>Remaining Cards</p>
+<input type="text" value="" name="reamaining" readonly="readonly" size="200" />
+
+</div>
+<div style="height:100px;">
+</div>
+</body>
+
+    
+<div id="logdiv">
+<p style="position:absolute; right:250px; bottom:200px;">Log</p>
+<textarea id="log" rows="10" cols="50" name="log" style="position:absolute; right:50px; bottom:30px;"></textarea>
+</div>
+
+  <textarea id="text"></textarea>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script>
+      
+     var socket= io();
+   socket.on('cards_set', function(data){
+		  console.log(data.cards_set);
+ 		$("input:text[name=deckcards]").val(data.cards_set);
+
+      });
+	  
+	  socket.on('cardsp1', function(data){
+		  console.log(data.cardsp1);
+      $("input:text[name=p1cards]").val(data.cardsp1);
+           socket.emit('testfunc',{'testfunction':"this is a test"});
+	  
+      });
+	  
+	  socket.on('cardsp2', function(data){
+		  console.log(data.cardsp2);
+      $("input:text[name=p2cards]").val(data.cardsp2);
+	  
+      });
+        
+      socket.on('cardsp3', function(data){
+		  console.log(data.cardsp3);
+      $("input:text[name=p3cards]").val(data.cardsp3);
+	  
+      });    
+        
+      socket.on('cardsp4', function(data){
+		  console.log(data.cardsp4);
+      $("input:text[name=p4cards]").val(data.cardsp4);
+	  
+      });
+        
+      socket.on('cardsp5', function(data){
+		  console.log(data.cardsp5);
+      $("input:text[name=p5cards]").val(data.cardsp5);
+	  
+      });
+        
+	  
+	  $("#p1button").click(function(){
+          var p1cardsset1 =$('#p1set1cards').val();
+  		  socket.emit('p1set1',{'p1set1':p1cardsset1});
+          
+          var p1cardsset2 =$('#p1set2cards').val();
+  		  socket.emit('p1set2',{'p1set2':p1cardsset2});
+        
+          
+          var p1cardsset3 =$('#p1set3cards').val();
+  		  socket.emit('p1set3',{'p1set3':p1cardsset3});
+          
+
+		});
+	  
+        
+          $("#p2button").click(function(){
+              
+          var p2cardsset1 =$('#p2set1cards').val();
+  		  socket.emit('p2set1',{'p2set1':p2cardsset1});
+          
+          var p2cardsset2 =$('#p2set2cards').val();
+  		  socket.emit('p2set2',{'p2set2':p2cardsset2});
+        
+          
+          var p2cardsset3 =$('#p2set3cards').val();
+  		  socket.emit('p2set3',{'p2set3':p2cardsset3});
+          
+
+		});
+        
+          $("#p3button").click(function(){
+              
+            
+          var p3cardsset1 =$('#p3set1cards').val();
+  		  socket.emit('p3set1',{'p3set1':p3cardsset1});
+          
+          var p3cardsset2 =$('#p3set2cards').val();
+  		  socket.emit('p3set2',{'p3set2':p3cardsset2});
+        
+          
+          var p3cardsset3 =$('#p2set3cards').val();
+  		  socket.emit('p3set3',{'p3set3':p3cardsset3});
+          
+
+		});
+	  
+	   $("#p4button").click(function(){
+              
+          var p4cardsset1 =$('#p4set1cards').val();
+  		  socket.emit('p4set1',{'p4set1':p4cardsset1});
+          
+          var p4cardsset2 =$('#p4set2cards').val();
+  		  socket.emit('p4set2',{'p4set2':p4cardsset2});
+        
+          
+          var p4cardsset3 =$('#p4set3cards').val();
+  		  socket.emit('p4set3',{'p4set3':p4cardsset3});
+          
+
+		});
+        
+        
+         $("#p5button").click(function(){
+              
+          var p5cardsset1 =$('#p5set1cards').val();
+  		  socket.emit('p5set1',{'p5set1':p5cardsset1});
+          
+          var p5cardsset2 =$('#p5set2cards').val();
+  		  socket.emit('p5set2',{'p5set2':p5cardsset2});
+        
+          
+          var p5cardsset3 =$('#p5set3cards').val();
+  		  socket.emit('p5set3',{'p5set3':p5cardsset3});
+          
+
+		});
+        
+         $("#ready").click(function(){
+              
+          var emailidofuser = $('#playeremailid').val();
+          alert(emailidofuser);
+  		  socket.emit('email',{'email':emailidofuser});
+          
+		});
+        
+        
+	  
+	  
+	  
+	  
+        
+        
+        
+	    $(document).ready(function(){
+    $('#text').keypress(function(e){
+      socket.emit('client_data', {'letter': String.fromCharCode(e.charCode)});
+    });
+            
+           
+  });
+        
+        
+        
+    </script>

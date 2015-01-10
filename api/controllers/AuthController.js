@@ -1,8 +1,5 @@
-/**
- * AuthController
- *
- */
 var passport = require('passport');
+
 module.exports = {
 
  login: function(req,res){
@@ -11,23 +8,21 @@ module.exports = {
 
   processcheck: function (req, res) {
     console.log('I am here');
-
+      var datenow = sessionstore.date = 1;
+      console.log(sessionstore.date);
       passport.authenticate('local', function(err, user, info) {
       if ((err) || (!user)) {
-        //return res.send({
-        //message: 'login failed'
-
-        //});
+       
           return res.redirect('/user/new');
         res.send(err);
       }
       req.logIn(user, function(err) {
+        
         if (err) res.send(err);
-        //return res.send({
-        //  message: 'login successful'
-
-    //    });
+       
+          //  req.session.userName = "hello";
           return res.redirect('/user/show/'+user.id);
+        
       });
     })(req, res);
 
@@ -53,7 +48,13 @@ module.exports = {
     function (req, res) {
       res.redirect('/user/dashboard');
     })(req, res, next);
-  }
+  },
+    
+    logout: function(req,res){
+        res.send(req.session.userName);
+        ///res.view();
+    },
+
 
 
 

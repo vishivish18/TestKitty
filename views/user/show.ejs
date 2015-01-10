@@ -2,3 +2,29 @@
 <h3>contact :<%= user.username %></h3>
 <a href="/user/edit/<%= user.id %>">Edit</a>
 <a href="/logout">Logout</a>
+</br>
+</br></br>
+
+
+
+<div style="height:50px;"></div>
+
+<div align="center">
+    <h3>Current Balance : 0.00 INR</h3>
+    
+  
+    <form action="/buy" mehotd="POST">
+        <input name="balance" type="text" placeholder="Enter amount you want to buy"/>
+        </br>
+        <input type="submit"  />
+    </form>
+    
+    <div style="height:10px;"></div>
+    <h2>Or</h2></br>
+    <h1>Choose the amount to play for !</h1>
+    <a href="/user/gametable/"><input type="submit" name="buybutton" value="50"  /></a>
+    <input type="submit" name="buybutton" value="100"  />
+    <input type="submit" name="buybutton" value="500"  />
+    <input type="submit" name="buybutton" value="1000"  />
+
+</div>

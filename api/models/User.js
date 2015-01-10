@@ -8,19 +8,39 @@ var bcrypt = require('bcryptjs');
 module.exports = {
 schema: true,
   attributes: {
+    
+      userid: {
+     
+    },
       
     username: {
      type: 'email',
         required: true, 
         unique: true
     },
+     
       
-      name: {
+      
+     name: {
       type: 'string',
           required: true,
           
           
       },
+      
+      mobile: {
+        type: 'string',
+          
+    },
+      
+      provider: {
+     
+    },
+      
+      status: {
+     
+    },
+      
       password: {
       type: 'string',
           required: true

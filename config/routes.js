@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'home/index'
+    view: 'user/new'
   },
  
   '/login': {
@@ -48,7 +48,16 @@ module.exports.routes = {
   '/logout': {
     controller: 'AuthController',
     action: 'logout'
+  },
+    
+     '/user/gametable/': {
+    view: 'user/gametable'
+  },
+    '/buy': {
+    controller: 'UserBalanceController',
+    action: 'buychips'
   }
+    
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
