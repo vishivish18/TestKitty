@@ -7,9 +7,7 @@ module.exports = {
     },
 
   processcheck: function (req, res) {
-    console.log('I am here');
-      var datenow = sessionstore.date = 1;
-      console.log(sessionstore.date);
+   
       passport.authenticate('local', function(err, user, info) {
       if ((err) || (!user)) {
        
