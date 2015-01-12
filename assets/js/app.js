@@ -11,5 +11,6 @@ io.socket.on('connect', function socketConnected() {
 
     // Show the main UI
   console.log('this is emitted from client');
+    console.log('this is emitted from client2');
 
 });
