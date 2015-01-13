@@ -35,6 +35,10 @@ module.exports.routes = {
   '/': {
     view: 'user/new'
   },
+    
+    '/user/approve': {
+    view: 'user/approve'
+  },
  
   '/login': {
     controller: 'AuthController',

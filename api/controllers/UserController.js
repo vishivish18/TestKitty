@@ -114,6 +114,8 @@ module.exports = {
             }
             
             console.log('success'+req.params.id);
+            res.redirect('/user/approve/');
+            
         });
     },
     
