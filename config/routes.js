@@ -53,10 +53,14 @@ module.exports.routes = {
      '/user/gametable/': {
     view: 'user/gametable'
   },
+    
+    
     '/buy': {
     controller: 'UserBalanceController',
     action: 'buychips'
-  }
+  },
+    
+ 
     
   /***************************************************************************
   *                                                                          *

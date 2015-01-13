@@ -25,6 +25,9 @@ module.exports = {
     })(req, res);
 
   },
+    
+    
+    
 
   'facebook': function (req, res, next) {
     passport.authenticate('facebook', { scope: ['email', 'user_about_me']},
