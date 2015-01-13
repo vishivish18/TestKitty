@@ -107,16 +107,28 @@ module.exports = {
         
          
         
-        User.update(req.params.id,{$set : {flag: '1'}}, function (err, user){
-            if(err) { 
-                return res.redirect('/user/edit/' + req.param.id);
-                console.log('failure'+req.params.id);
-            }
+//        User.update(req.params.id,{$set : {flag: '1'}}, function (err, user){
+//            if(err) { 
+//                return res.redirect('/user/edit/' + req.param.id);
+//                console.log('failure'+req.params.id);
+//            }
+//            
+//            console.log('success'+req.params.id);
+//            res.redirect('/user/approve/');
+//            
+//        });
+//        
+        
+        User.update(req.params.id ,{flag: "69"}).exec(function(err, users) {
+         if(err) {return res.serverError(err);} 
+         
             
+            //return res.send('success');
             console.log('success'+req.params.id);
             res.redirect('/user/approve/');
-            
-        });
+});
+        
+        
     },
     
     
