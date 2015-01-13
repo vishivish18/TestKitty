@@ -40,6 +40,11 @@ schema: true,
       status: {
      
     },
+      flag: {
+          type:'string',
+          defaultsTo: '0'
+     
+    },
       
       password: {
       type: 'string',

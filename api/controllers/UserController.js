@@ -1,4 +1,4 @@
-
+var mandrill = require('node-mandrill')('J2uoD5eO9PA7eOs8Z407UQ');
 module.exports = {
 	
     'new': function(req,res){
@@ -7,6 +7,7 @@ module.exports = {
     
     
       create: function (req, res, next){
+          
         
         User.create(req.params.all(), function userCreated (err, user){
            
@@ -17,11 +18,40 @@ module.exports = {
                         }
                         return res.redirect('/user/new');
                     }
+            else
+            
+            {
+            
+            
+                  //////////////////////////////////////////////////////////////////////////////////////////////////
+                                    mandrill('/messages/send', {
+                                                    message: {
+                                                        to: [{email: user.username, name: 'Roshan Raj'}],
+                                                        from_email: 'me@roshanraj.com',
+                                                        subject: "test email",
+                                                        text: "Test Email, validate by visiting the link <a     href='localhost:3000/api/userd/"+user.id+"'>localhost:3000/api/userd/"+user.id+"></a>"
+                                                    }
+                                                }, function(error, response)
+                                                {
+                                                    //uh oh, there was an error
+                                                    if (error) console.log( JSON.stringify(error) );
+
+                                                    //everything's good, lets see what mandrill said
+                                                    else console.log(response);
+                                                });
+
+                                
+                                //////////////////////////////////////////////////////////////////////////////////////////////////
+                                
+            res.redirect('/user/show/'+user.id);
+            }
             
             //res.json(user);
             
             
-            res.redirect('/user/show/'+user.id);
+            
+            
+            
                     
         }); 
     },
@@ -70,6 +100,23 @@ module.exports = {
             res.redirect('/user/show/' + req.param('id'));
         });
     },
+    
+    verifyemail: function (req, res, next){
+        
+        console.log(req.params.id);
+        
+         
+        
+        User.update(req.params.id,{$set : {flag: '1'}}, function (err, user){
+            if(err) { 
+                return res.redirect('/user/edit/' + req.param.id);
+                console.log('failure'+req.params.id);
+            }
+            
+            console.log('success'+req.params.id);
+        });
+    },
+    
     
      destroy: function (req, res, next){
         User.findOne(req.param('id'), function foundUser (err, user){

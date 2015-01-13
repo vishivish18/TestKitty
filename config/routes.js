@@ -60,6 +60,17 @@ module.exports.routes = {
     action: 'buychips'
   },
     
+    'get /api/userd/:id': {
+    controller: 'UserController',
+    action: 'verifyemail'
+        
+  },
+    
+    
+     
+    
+    
+    
  
     
   /***************************************************************************
