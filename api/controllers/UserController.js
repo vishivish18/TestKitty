@@ -29,7 +29,7 @@ module.exports = {
                                                         to: [{email: user.username, name: 'Roshan Raj'}],
                                                         from_email: 'me@roshanraj.com',
                                                         subject: "test email",
-                                                        text: "Test Email, validate by visiting the link <a     href='localhost:3000/api/userd/"+user.id+"'>localhost:3000/api/userd/"+user.id+"></a>"
+                                                        html: "<a href=\"http:\/\/www.google.com\">Click<\/a>"
                                                     }
                                                 }, function(error, response)
                                                 {
@@ -104,22 +104,9 @@ module.exports = {
     verifyemail: function (req, res, next){
         
         console.log(req.params.id);
+          
         
-         
-        
-//        User.update(req.params.id,{$set : {flag: '1'}}, function (err, user){
-//            if(err) { 
-//                return res.redirect('/user/edit/' + req.param.id);
-//                console.log('failure'+req.params.id);
-//            }
-//            
-//            console.log('success'+req.params.id);
-//            res.redirect('/user/approve/');
-//            
-//        });
-//        
-        
-        User.update(req.params.id ,{flag: "69"}).exec(function(err, users) {
+        User.update(req.params.id ,{flag: "1"}).exec(function(err, users) {
          if(err) {return res.serverError(err);} 
          
             
