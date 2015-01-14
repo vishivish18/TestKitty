@@ -41,8 +41,8 @@ schema: true,
      
     },
       flag: {
-          type:'string',
-          defaultsTo: '0'
+          type:'boolean',
+          defaultsTo: 'false'
      
     },
       

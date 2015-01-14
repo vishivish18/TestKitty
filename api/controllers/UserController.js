@@ -106,7 +106,7 @@ module.exports = {
         console.log(req.params.id);
           
         
-        User.update(req.params.id ,{flag: "1"}).exec(function(err, users) {
+        User.update(req.params.id ,{flag: true}).exec(function(err, users) {
          if(err) {return res.serverError(err);} 
          
             
