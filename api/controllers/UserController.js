@@ -21,7 +21,7 @@ module.exports = {
             else
             
             {
-            
+            var mail_path ="localhost:1337/api/userd/"+user.id; 
             
                   //////////////////////////////////////////////////////////////////////////////////////////////////
                                     mandrill('/messages/send', {
@@ -29,7 +29,7 @@ module.exports = {
                                                         to: [{email: user.username, name: 'Roshan Raj'}],
                                                         from_email: 'me@roshanraj.com',
                                                         subject: "test email",
-                                                        html: "<a href=\"http:\/\/www.google.com\">Click<\/a>"
+                                                        html: "<a href=\"http:\/\/"+mail_path+"/\">Click Here<\/a> to activate your account "
                                                     }
                                                 }, function(error, response)
                                                 {
@@ -112,7 +112,7 @@ module.exports = {
             
             //return res.send('success');
             console.log('success'+req.params.id);
-            res.redirect('/user/approve/');
+            res.redirect('/user/show/' + req.param('id'));
 });
         
         
