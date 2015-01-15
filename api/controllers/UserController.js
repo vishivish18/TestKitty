@@ -21,7 +21,8 @@ module.exports = {
             else
             
             {
-            var mail_path ="localhost:1337/api/userd/"+user.id; 
+             var mail_path ="localhost:1337/api/userd/"+user.id;
+                console.log(mail_path)
             
                   //////////////////////////////////////////////////////////////////////////////////////////////////
                                     mandrill('/messages/send', {
@@ -29,8 +30,8 @@ module.exports = {
                                                         to: [{email: user.username, name: 'Roshan Raj'}],
                                                         from_email: 'me@roshanraj.com',
                                                         subject: "test email",
-                                                        html: "<a href=\"http:\/\/"+mail_path+"/\">Click Here<\/a> to activate your account "
-                                                    }
+                                                        html: "<a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to activate your account "
+                                                    }    
                                                 }, function(error, response)
                                                 {
                                                     //uh oh, there was an error

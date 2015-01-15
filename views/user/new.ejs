@@ -1,3 +1,5 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <script>
   $(function() {
     $( "#tabs" ).tabs();
@@ -22,11 +24,14 @@
 <label>Password:</label>
 <div><input name="password" type="password" /></div>
 </br>
+<div class="g-recaptcha" data-sitekey="6LfLhAATAAAAAFS0kNUqL6V6zC_0uWabrDQhVz3E"></div>    
+</br>
 <div><input type="submit" /></div>
 </br>
 <a href="/auth/facebook">Login With Facebook</a>
 
 <p><a href="/forgotpassword" style="text-decoration:underline; cursor:pointer;">Forgot Password ?</a></p>
+
 </form>
 
 </div>
@@ -50,3 +55,5 @@
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
 </div>
+
+
