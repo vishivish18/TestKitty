@@ -113,6 +113,7 @@ module.exports = {
             
             //return res.send('success');
             console.log('success'+req.params.id);
+            console.log('Updated');
             res.redirect('/user/show/' + req.param('id'));
 });
         
