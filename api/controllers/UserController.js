@@ -11,6 +11,7 @@ module.exports = {
         
         User.create(req.params.all(), function userCreated (err, user){
            
+            
                     if (err) {
                         console.log(err);
                         req.session.flash = {
@@ -71,6 +72,55 @@ module.exports = {
     },
     
     
+    
+    emailresetcheck: function (req, res, next){
+                console.log('in action');
+        var test = req.body.username;
+        console.log(test);
+        User.findOne({ username: test }, function(err, user) {
+            if(err)
+            {
+            console.log('user not found');
+                
+            }
+              else
+            
+            {
+             var mail_path ="localhost:1337/user/userreset/"+user.id;
+               console.log(mail_path)
+            
+               
+               
+                  //////////////////////////////////////////////////////////////////////////////////////////////////
+                                    mandrill('/messages/send', {
+                                                    message: {
+                                                        to: [{email: user.username, name: 'Test Kitty'}],
+                                                        from_email: 'me@roshanraj.com',
+                                                        subject: "Password Reset",
+                                                        html: "<a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to reset your Password "
+                                                    }    
+                                                }, function(error, response)
+                                                {
+                                                    //uh oh, there was an error
+                                                    if (error) console.log( JSON.stringify(error) );
+
+                                                    //everything's good, lets see what mandrill said
+                                                    else console.log(response);
+                                                });
+
+                                
+                                //////////////////////////////////////////////////////////////////////////////////////////////////
+                                
+            console.log('Email sent sucessfully for password reset !');
+            }
+    
+});
+        
+    },
+    
+    
+    
+    
      index: function (req, res, next){
         User.find(function foundUsers (err, users){
             if(err) return next (err);
@@ -119,6 +169,27 @@ module.exports = {
         
         
     },
+    
+    
+    
+    updatepassword: function (req, res, next){
+        
+        var check = req.body.password;
+        console.log('in update userpassword'+check);
+         User.update(req.params.id ,{password: check}).exec(function(err, users) {
+         if(err) {return res.serverError(err);} 
+         
+            
+            //return res.send('success');
+            console.log('success'+req.params.id);
+            console.log('Updated');
+            res.redirect('/user/show/' + req.param('id'));
+});
+        
+        
+        
+    },
+    
     
     
      destroy: function (req, res, next){

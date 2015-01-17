@@ -35,11 +35,15 @@ module.exports.routes = {
   '/': {
     view: 'user/new'
   },
+  
+    '/forgotpassword': {
+    view: 'user/resetpassword'
+  },
     
     '/user/approve': {
     view: 'user/approve'
   },
- 
+    
   '/login': {
     controller: 'AuthController',
     action: 'login'
@@ -49,6 +53,12 @@ module.exports.routes = {
     action: 'processcheck'
   },
 
+    '/resetprocess': {
+    controller: 'UserController',
+    action: 'emailresetcheck'
+  },
+
+    
   '/logout': {
     controller: 'AuthController',
     action: 'logout'
@@ -64,9 +74,22 @@ module.exports.routes = {
     action: 'buychips'
   },
     
+      
+    '/updatepassword': {
+    controller: 'UserController',
+    action: 'updatepassword'
+  },
+    
+    
     'get /api/userd/:id': {
     controller: 'UserController',
     action: 'verifyemail'
+        
+  },
+    
+    
+    'get /user/userreset/:id': {
+    view: 'user/updatepassword'
         
   },
     
