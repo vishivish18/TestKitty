@@ -28,10 +28,10 @@ module.exports = {
                   //////////////////////////////////////////////////////////////////////////////////////////////////
                                     mandrill('/messages/send', {
                                                     message: {
-                                                        to: [{email: user.username, name: 'Roshan Raj'}],
+                                                        to: [{email: user.username, name: 'Kitty'}],
                                                         from_email: 'me@roshanraj.com',
-                                                        subject: "test email",
-                                                        html: "<a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to activate your account "
+                                                        subject: "Welcome to Kitty | Activate your account",
+                                                        html: "<a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to verify your email address and activate your account "
                                                     }    
                                                 }, function(error, response)
                                                 {
@@ -78,14 +78,11 @@ module.exports = {
         var test = req.body.username;
         console.log(test);
         User.findOne({ username: test }, function(err, user) {
-            if(err)
-            {
-            console.log('user not found');
-                
-            }
-              else
+            if(err) return next (err);
+            if(!user) return next();
             
-            {
+            
+            
              var mail_path ="localhost:1337/user/userreset/"+user.id;
                console.log(mail_path)
             
@@ -112,7 +109,10 @@ module.exports = {
                                 //////////////////////////////////////////////////////////////////////////////////////////////////
                                 
             console.log('Email sent sucessfully for password reset !');
-            }
+                //res.redirect('/user/new/');
+                var sentmail = 'Email sent sucessfully for password reset, please check your registered email id !';
+                res.json(sentmail);
+            
     
 });
         
@@ -175,18 +175,7 @@ module.exports = {
     updatepassword: function (req, res, next){
         
         var check = req.body.password;
-        console.log('in update userpassword'+check);
-         User.update(req.params.id ,{password: check}).exec(function(err, users) {
-         if(err) {return res.serverError(err);} 
-         
-            
-            //return res.send('success');
-            console.log('success'+req.params.id);
-            console.log('Updated');
-            res.redirect('/user/show/' + req.param('id'));
-});
-        
-        
+        res.json(check);
         
     },
     
