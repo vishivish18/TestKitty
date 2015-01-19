@@ -91,10 +91,10 @@ module.exports = {
                   //////////////////////////////////////////////////////////////////////////////////////////////////
                                     mandrill('/messages/send', {
                                                     message: {
-                                                        to: [{email: user.username, name: 'Test Kitty'}],
+                                                        to: [{email: user.username, name: 'Kitty'}],
                                                         from_email: 'me@roshanraj.com',
-                                                        subject: "Password Reset",
-                                                        html: "<a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to reset your Password "
+                                                        subject: "Kitty | Password Reset",
+                                                        html: "<p>We are sorry you lost your password.</p><a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to reset your Password "
                                                     }    
                                                 }, function(error, response)
                                                 {
