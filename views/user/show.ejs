@@ -12,7 +12,7 @@ User Verification Status is :<%= user.flag %>
 <div style="height:50px;"></div>
 
 <div align="center">
-    <h3>Current Balance : 0.00 INR</h3>
+    <h3>Current Balance :<%= user.UserBalance.Balance %></h3>
     
   
     <form action="/buy" mehotd="POST">

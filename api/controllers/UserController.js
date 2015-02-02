@@ -2,16 +2,20 @@ var mandrill = require('node-mandrill')('J2uoD5eO9PA7eOs8Z407UQ');
 module.exports = {
 	
     'new': function(req,res){
+   
         res.view();
     },
     
-    
+       
+
       create: function (req, res, next){
           
-        
-        User.create(req.params.all(), function userCreated (err, user){
-           
-            
+         UserBalance.create({ id: 1, Balance: 60 }, function userCreated(err, usrBalance) {
+            if (err) {
+                res.send(err)
+            }
+            User.create({ id: 1, name: req.param('name'), password: req.param('password'), username: req.param('username'), UserBalance: usrBalance.id, UserInTable: 0 }, function userCreated(err, user) {
+         
                     if (err) {
                         console.log(err);
                         req.session.flash = {
@@ -46,24 +50,20 @@ module.exports = {
                                 //////////////////////////////////////////////////////////////////////////////////////////////////
                                 
             res.redirect('/user/show/'+user.id);
-            }
-            
-            //res.json(user);
-            
-            
-            
-            
-            
-                    
+            }    
         }); 
+        });
     },
     
     
     
     show: function (req, res, next){
-        User.findOne(req.param('id'), function foundUser (err, user){
+       // User.findOne(req.param('id'), function foundUser (err, user){
+        User.findOne(req.param('id')).populate('UserBalance').exec(function (err, user) {
             if(err) return next (err);
             if(!user) return next();
+            req.session.userid = user.id;
+            req.session.me = user.name;
             res.view({
             user: user
             });
@@ -71,56 +71,7 @@ module.exports = {
         });
     },
     
-    
-    
-    emailresetcheck: function (req, res, next){
-                console.log('in action');
-        var test = req.body.username;
-        console.log(test);
-        User.findOne({ username: test }, function(err, user) {
-            if(err) return next (err);
-            if(!user) return next();
-            
-            
-            
-             var mail_path ="localhost:1337/user/userreset/"+user.id;
-               console.log(mail_path)
-            
-               
-               
-                  //////////////////////////////////////////////////////////////////////////////////////////////////
-                                    mandrill('/messages/send', {
-                                                    message: {
-                                                        to: [{email: user.username, name: 'Kitty'}],
-                                                        from_email: 'me@roshanraj.com',
-                                                        subject: "Kitty | Password Reset",
-                                                        html: "<p>We are sorry you lost your password.</p><a href=\"http:\/\/"+mail_path+"\">Click Here<\/a> to reset your Password "
-                                                    }    
-                                                }, function(error, response)
-                                                {
-                                                    //uh oh, there was an error
-                                                    if (error) console.log( JSON.stringify(error) );
 
-                                                    //everything's good, lets see what mandrill said
-                                                    else console.log(response);
-                                                });
-
-                                
-                                //////////////////////////////////////////////////////////////////////////////////////////////////
-                                
-            console.log('Email sent sucessfully for password reset !');
-                //res.redirect('/user/new/');
-                var sentmail = 'Email sent sucessfully for password reset, please check your registered email id !';
-                res.json(sentmail);
-            
-    
-});
-        
-    },
-    
-    
-    
-    
      index: function (req, res, next){
         User.find(function foundUsers (err, users){
             if(err) return next (err);

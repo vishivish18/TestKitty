@@ -1,17 +1,15 @@
-/**
-* User.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+
 var bcrypt = require('bcryptjs');
 module.exports = {
-schema: true,
+ schema: true,
+  autoPK: false,
   attributes: {
     
-      userid: {
-     
-    },
+       id: {
+            type: 'integer',
+            required: true,
+            primaryKey: true
+        },
       
     username: {
      type: 'email',
@@ -33,13 +31,7 @@ schema: true,
           
     },
       
-      provider: {
-     
-    },
       
-      status: {
-     
-    },
       flag: {
           type:'boolean',
           defaultsTo: 'false'
@@ -48,37 +40,74 @@ schema: true,
       
       password: {
       type: 'string',
-          required: true
+       required: true
      
       },
       re_password: {
-      type: 'string',
-          required: true
-     
+      type: 'string'
+         
       },
+      UserBalance: {
+            model: 'UserBalance'
+        },
+        UserInTable: {
+            model: 'UserInTable'
+        },
       toJSON: function() {
       var obj = this.toObject();
-      delete obj.password;
       return obj;
     }
 
   },
     
-     beforeCreate: function(user, cb) {
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(user.password, salt, function(err, hash) {
-        if (err) {
-          console.log(err);
-          cb(err);
-        }else{
-          user.password = hash;
-          cb(null, user);
-        }
-      });
-    });
+     beforeCreate: function(item, cb) 
+     {
+
+      var incModel = "User";
+
+        Counter.findOne({ "model_name": incModel }).exec(function (err, counter) {
+            if (err) return err;
+            if (counter) {
+                var newAmount = counter.amount + 1;
+                counter.amount = newAmount;
+                counter.save(function (err, c) 
+                {
+                    item.id = newAmount;
+                    bcrypt.genSalt(10, function(err, salt) 
+                   {
+                    bcrypt.hash(item.password, salt, function(err, hash)
+                    {
+                     item.password = hash;
+                    cb(null,item);
+                    });
+                    });
+                   
+                });
+            } else {
+                Counter.create({ amount: 1, model_name: 'User' }, function countercreate(err, user) {
+                    if (err) {
+
+                    }
+                });
+                item.id = 1;
+                 
+                bcrypt.genSalt(10, function(err, salt) 
+                   {
+                    bcrypt.hash(item.password, salt, function(err, hash)
+                    {
+                    item.password = hash;
+                    
+                    console.log(item.password);
+                    cb(null,item);
+                    });
+                    });
+                
+            }
+        });
+
+      
   }
     
     
     
 };
-
