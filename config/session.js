@@ -21,7 +21,7 @@ module.exports.session = {
   * of your users, forcing them to log in again.                             *
   *                                                                          *
   ***************************************************************************/
-  secret: 'b51b0345fcfa032faa091418229e228e',
+  secret: 'b33f45bca43925c2723d1c4db6c9272d',
 
 
   /***************************************************************************
@@ -31,9 +31,9 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // }
+   cookie: {
+     maxAge: 24 * 60 * 60 * 1000
+   },
 
   /***************************************************************************
   *                                                                          *
@@ -67,13 +67,16 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-   adapter: 'mongo',
+    adapter: 'mongo',
    host: 'localhost',
    port: 27017,
    db: 'testkittydb3',
    collection: 'sessions',
 
-    
+   
+  
+   autoRemove: 'interval',
+   autoRemoveInterval: 10,
   /***************************************************************************
   *                                                                          *
   * Optional Values:                                                         *
@@ -85,8 +88,9 @@ module.exports.session = {
 
   // username: '',
   // password: '',
-  // auto_reconnect: false,
+   autoReconnect: true
   // ssl: false,
   // stringify: true
 
 };
+
